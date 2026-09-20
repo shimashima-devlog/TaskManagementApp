@@ -1,0 +1,58 @@
+@using System.Diagnostics
+@using Microsoft.VisualBasic
+@* Controllerから渡されたタスク一覧データを受け取る *@
+@model List<TaskItem>
+
+<h1>タスク一覧</h1>
+<p>
+    <a asp-action="Create">新規登録</a>
+</p>
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>タスク名</th>
+            <th>担当者</th>
+            <th>期限</th>
+            <th>ステータス</th>
+            <th>備考</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @* タスク一覧データをModelという名前で参照できるようにする *@
+        @foreach(TaskItem task in Model)
+        {
+           <tr>
+            <td>@task.Id</td>
+            <td>@task.TaskName</td>
+            <td>@task.Assignee</td>
+            <td>@task.DueDate?.ToString("yyyy/MM/dd")</td>
+            <td>@switch(task.Status)
+                {
+                    case WorkStatus.NotStarted:
+                    <span>未着手</span>
+                    break;
+
+                    case WorkStatus.InProgress:
+                    <span>対応中</span>
+                    break;
+
+                    case WorkStatus.Completed:
+                    <span>完了</span>
+                    break;
+                }
+            </td>
+            <td>@task.Notes</td>
+            <td>
+                <a asp-action="Edit" asp-route-Id="@task.Id">編集</a>
+                <a asp-action="Delete" asp-route-id="@task.Id">削除</a>
+            </td>
+           </tr>
+        }    
+    </tbody>
+</table>
+
+

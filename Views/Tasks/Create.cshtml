@@ -1,0 +1,38 @@
+@model TaskManagementApp.Models.TaskItem
+
+<h2>タスク新規登録</h2>
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="TaskName">タスク名</label>
+        <input asp-for="TaskName" />
+        <span asp-validation-for="TaskName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Assignee">担当者</label>
+        <input asp-for="Assignee" />
+        <span asp-validation-for="Assignee" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="DueDate">期限</label>
+        <input asp-for="DueDate" />
+        <span asp-validation-for="DueDate" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Status">ステータス</label>
+        <select asp-for="Status">
+            <option value="NotStarted">未着手</option>
+            <option value="InProgress">対応中</option>
+            <option value="Completed">完了</option>
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="Notes">備考</label>
+        <textarea asp-for="Notes"></textarea>
+    </div>
+
+    <button type="submit">登録</button>
+</form>

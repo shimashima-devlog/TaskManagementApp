@@ -1,0 +1,11 @@
+@model TaskManagementApp.Models.TaskItem
+
+<h2>タスク削除</h2>
+
+<p>このタスクを削除しますか？</p>
+<p>タスク名：@Model.TaskName</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">削除</button>
+</form>
